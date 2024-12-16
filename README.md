@@ -7,7 +7,14 @@
   Historic note: previous version checked for empty pull request, changed to the correct theme `minima`.
 -->
 
+<<<<<<< HEAD
 ## Step 2: Configure your site
+=======
+## Технические требования sd
+- Современный веб-браузер с поддержкой HTML5
+- Поддержка JavaScript
+- Подключение к интернету для загрузки видео-контента
+>>>>>>> 839a5e8 (Add video market app files)
 
 _You turned on GitHub Pages! :tada:_
 
