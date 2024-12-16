@@ -1,62 +1,33 @@
-# Видео маркет - Video Market App
 
-## Описание
-Веб-приложение для просмотра видео-контента с возможностью навигации с помощью колеса мыши. Приложение поддерживает циклическое переключение между видео, добавление в корзину и систему лайков.
 
-## Функциональность
-- Просмотр видео
-- Навигация с помощью колеса мыши (вверх/вниз)
-- Циклическое переключение видео
-- Лайки видео
-- Корзина покупок
-- Репосты
-- Профиль пользователя
+<!--
+  <<< Author notes: Step 2 >>>
+  Start this step by acknowledging the previous step.
+  Define terms and link to docs.github.com.
+  Historic note: previous version checked for empty pull request, changed to the correct theme `minima`.
+-->
 
-## Технические требования
-- Современный веб-браузер с поддержкой HTML5
-- Поддержка JavaScript
-- Подключение к интернету для загрузки видео-контента
+## Step 2: Configure your site
 
-## Структура проекта
-```
-project/
-├── assets/
-│   └── css/
-│       └── styles.css
-├── js/
-│   ├── app.js
-│   ├── VideoSlider.js
-│   └── handlers.js
-├── videos/
-│   ├── video1.mp4
-│   ├── video2.mp4
-│   └── video3.mp4
-└── index.html
-```
+_You turned on GitHub Pages! :tada:_
 
-## Использование
-- Прокрутка колеса мыши вверх -> предыдущее видео
-- Прокрутка колеса мыши вниз -> следующее видео
-- Клик по кнопке лайка -> поставить/убрать лайк
-- Клик по кнопке корзины -> добавить в корзину
-- Клик по кнопке репоста -> поделиться видео
+We'll work in a branch, `my-pages`, that I created for you to get this site looking great. :sparkle:
 
-## Зависимости
-- Font Awesome 5.15.4
-- Hammer.js 2.0.8
+Jekyll uses a file titled `_config.yml` to store settings for your site, your theme, and reusable content like your site title and GitHub handle. You can check out the `_config.yml` file on the **Code** tab of your repository.
 
-## Особенности
-- Автоматическое циклическое переключение видео
-- Защита от множественных прокруток
-- Предзагрузка следующего видео
-- Адаптивный дизайн
-- Поддержка мобильных устройств
+We need to use a blog-ready theme. For this activity, we will use a theme named "minima".
 
-## Лицензия
-MIT License
+### :keyboard: Activity: Configure your site
 
-## Авторы
-Stanislav Farfudinov
+1. Browse to the `_config.yml` file in the `my-pages` branch.
+1. In the upper right corner, open the file editor.
+1. Add a `theme:` set to **minima** so it shows in the `_config.yml` file as below:
+   ```yml
+   theme: minima
+   ```
+1. (optional) You can modify the other configuration variables such as `title:`, `author:`, and `description:` to further customize your site.
+1. Commit your changes.
+1. (optional) Create a pull request to view all the changes you'll make throughout this course. Click the **Pull Requests** tab, click **New pull request**, set `base: main` and `compare:my-pages`.
+1. Wait about 20 seconds then refresh this page (the one you're following instructions from). [GitHub Actions](https://docs.github.com/en/actions) will automatically update to the next step.
 
-## Контакты
-odin_za_vseh@icloud.com
+
