@@ -23,12 +23,11 @@ let isScrolling = false;
 document.addEventListener('DOMContentLoaded', function() {
     videoSlider = new VideoSlider();
     
-    // Добавляем обработчик колеса мыши с защитой от множественных прокруток
+    // Обработчик колеса мыши
     document.addEventListener('wheel', function(event) {
         event.preventDefault();
         
-        if (isScrolling) return; // Если уже выполняется прокрутка, игнорируем новые события
-        
+        if (isScrolling) return;
         isScrolling = true;
         
         if (event.deltaY < 0) {
@@ -37,11 +36,37 @@ document.addEventListener('DOMContentLoaded', function() {
             videoSlider.nextVideo();
         }
         
-        // Сбрасываем флаг через небольшую задержку
         setTimeout(() => {
             isScrolling = false;
-        }, 1000); // Задержка в 500мс перед следующей возможной прокруткой
+        }, 1000);
+    }, { passive: false });
+
+    // Добавляем поддержку свайпов
+    const videoContainer = document.getElementById('video-container');
+    const hammer = new Hammer(videoContainer);
+    
+    // Настраиваем определение вертикального свайпа
+    hammer.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+    
+    // Обработчик свайпов
+    hammer.on('swipeup swipedown', function(event) {
+        if (isScrolling) return;
+        isScrolling = true;
         
+        if (event.type === 'swipeup') {
+            videoSlider.nextVideo();
+        } else if (event.type === 'swipedown') {
+            videoSlider.previousVideo();
+        }
+        
+        setTimeout(() => {
+            isScrolling = false;
+        }, 500);
+    });
+
+    // Отключаем стандартный скролл на мобильных устройствах
+    document.body.addEventListener('touchmove', function(event) {
+        event.preventDefault();
     }, { passive: false });
 
     // Настройка корзины
