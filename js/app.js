@@ -17,10 +17,32 @@ const videos = [
     }
 ];
 
-// Инициализация приложения
+let videoSlider;
+let isScrolling = false;
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Инициализация слайдера
-    const videoSlider = new VideoSlider();
+    videoSlider = new VideoSlider();
+    
+    // Добавляем обработчик колеса мыши с защитой от множественных прокруток
+    document.addEventListener('wheel', function(event) {
+        event.preventDefault();
+        
+        if (isScrolling) return; // Если уже выполняется прокрутка, игнорируем новые события
+        
+        isScrolling = true;
+        
+        if (event.deltaY < 0) {
+            videoSlider.previousVideo();
+        } else {
+            videoSlider.nextVideo();
+        }
+        
+        // Сбрасываем флаг через небольшую задержку
+        setTimeout(() => {
+            isScrolling = false;
+        }, 1000); // Задержка в 500мс перед следующей возможной прокруткой
+        
+    }, { passive: false });
 
     // Настройка корзины
     const cartButton = document.getElementById('cartButton');

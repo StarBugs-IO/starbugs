@@ -129,3 +129,23 @@ document.addEventListener("DOMContentLoaded", function () {
 window.onload = function() {
     loadNextVideo();
 };
+
+document.addEventListener('wheel', function(event) {
+    // Предотвращаем стандартную прокрутку страницы
+    event.preventDefault();
+    
+    // Определяем направление прокрутки
+    if (event.deltaY < 0) {
+        // Прокрутка вверх - предыдущее видео
+        videoSlider.previousVideo();
+    } else {
+        // Прокрутка вниз - следующее видео
+        videoSlider.nextVideo();
+    }
+}, { passive: false });
+
+// Также добавьте в начало файла
+document.addEventListener('DOMContentLoaded', function() {
+    // Отключаем стандартную прокрутку страницы
+    document.body.style.overflow = 'hidden';
+});
