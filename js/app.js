@@ -18,7 +18,6 @@ const videos = [
 ];
 
 let videoSlider;
-let isScrolling = false;
 
 document.addEventListener('DOMContentLoaded', function() {
     videoSlider = new VideoSlider();
@@ -27,18 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('wheel', function(event) {
         event.preventDefault();
         
-        if (isScrolling) return;
-        isScrolling = true;
+        if (videoSlider.isTransitioning) return;
         
         if (event.deltaY < 0) {
             videoSlider.previousVideo();
         } else {
             videoSlider.nextVideo();
         }
-        
-        setTimeout(() => {
-            isScrolling = false;
-        }, 1000);
     }, { passive: false });
 
     // Добавляем поддержку свайпов
@@ -50,18 +44,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Обработчик свайпов
     hammer.on('swipeup swipedown', function(event) {
-        if (isScrolling) return;
-        isScrolling = true;
+        if (videoSlider.isTransitioning) return;
         
         if (event.type === 'swipeup') {
             videoSlider.nextVideo();
         } else if (event.type === 'swipedown') {
             videoSlider.previousVideo();
         }
-        
-        setTimeout(() => {
-            isScrolling = false;
-        }, 500);
     });
 
     // Отключаем стандартный скролл на мобильных устройствах

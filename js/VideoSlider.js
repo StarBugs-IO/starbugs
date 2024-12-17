@@ -8,6 +8,8 @@ class VideoSlider {
         ];
         this.currentVideo = document.getElementById('currentVideo');
         this.videoContainer = document.getElementById('video-container');
+        this.isTransitioning = false;
+        this.transitionDuration = 1000;
         this.init();
     }
 
@@ -37,6 +39,9 @@ class VideoSlider {
     }
 
     nextVideo() {
+        if (this.isTransitioning) return false;
+        this.isTransitioning = true;
+        
         let nextIndex = this.currentIndex + 1;
         if (nextIndex >= this.videos.length) {
             nextIndex = 0;
@@ -51,10 +56,18 @@ class VideoSlider {
                 this.videoContainer.classList.remove('slide-up');
                 document.querySelector('.controls').classList.remove('slide-up');
             }, 500);
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, this.transitionDuration);
         }
+        return true;
     }
 
     previousVideo() {
+        if (this.isTransitioning) return false;
+        this.isTransitioning = true;
+        
         let prevIndex = this.currentIndex - 1;
         if (prevIndex < 0) {
             prevIndex = this.videos.length - 1;
@@ -69,6 +82,11 @@ class VideoSlider {
                 this.videoContainer.classList.remove('slide-down');
                 document.querySelector('.controls').classList.remove('slide-down');
             }, 500);
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, this.transitionDuration);
         }
+        return true;
     }
 }
