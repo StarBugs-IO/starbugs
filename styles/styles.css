@@ -1,0 +1,15 @@
+/* Анимация для панели после видео */
+.product-next-section {
+  animation: slideInPanel 0.5s ease-out;
+}
+
+@keyframes slideInPanel {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 

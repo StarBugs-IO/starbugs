@@ -7,6 +7,7 @@ class VideoSlider {
             { url: '/videos/video3.mp4' }
         ];
         this.currentVideo = document.getElementById('currentVideo');
+        this.videoContainer = document.getElementById('video-container');
         this.init();
     }
 
@@ -37,19 +38,37 @@ class VideoSlider {
 
     nextVideo() {
         let nextIndex = this.currentIndex + 1;
-        // Если достигли конца списка, возвращаемся к началу
         if (nextIndex >= this.videos.length) {
             nextIndex = 0;
         }
         this.loadVideo(nextIndex);
+        
+        if (this.videoContainer) {
+            this.videoContainer.classList.add('slide-up');
+            document.querySelector('.controls').classList.add('slide-up');
+            
+            setTimeout(() => {
+                this.videoContainer.classList.remove('slide-up');
+                document.querySelector('.controls').classList.remove('slide-up');
+            }, 500);
+        }
     }
 
     previousVideo() {
         let prevIndex = this.currentIndex - 1;
-        // Если достигли начала списка, переходим в конец
         if (prevIndex < 0) {
             prevIndex = this.videos.length - 1;
         }
         this.loadVideo(prevIndex);
+        
+        if (this.videoContainer) {
+            this.videoContainer.classList.add('slide-down');
+            document.querySelector('.controls').classList.add('slide-down');
+            
+            setTimeout(() => {
+                this.videoContainer.classList.remove('slide-down');
+                document.querySelector('.controls').classList.remove('slide-down');
+            }, 500);
+        }
     }
 }

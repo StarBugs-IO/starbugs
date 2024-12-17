@@ -94,6 +94,15 @@ video {
     z-index: 1000;
     width: 100vw;
     margin: 0;
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.controls.slide-up {
+    transform: translateY(-100vh);
+}
+
+.controls.slide-down {
+    transform: translateY(100vh);
 }
 
 .controls button {
