@@ -17,6 +17,9 @@ body {
     padding: 0;
     width: 100vw;
     height: 100vh;
+    perspective: 1000px;
+    background-color: #000;
+    transform-style: preserve-3d;
 }
 
 .video-container {
@@ -34,6 +37,14 @@ body {
     transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     overflow: hidden;
     border: none;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
 }
 
 .video-container.slide-up {
@@ -272,3 +283,387 @@ footer button:active svg {
         user-select: none;
     }
 } 
+
+/* Стили для моильных устройств */
+@media (max-width: 768px) {
+    .video-container {
+        touch-action: none; /* Отключаем стандартные жесты браузера */
+    }
+    
+    video {
+        pointer-events: none; /* Отключаем стандартные действия для видео */
+    }
+}
+
+/* Анимации для свайпов */
+.swipe-up {
+    animation: swipeUp 0.3s ease-out forwards;
+}
+
+.swipe-down {
+    animation: swipeDown 0.3s ease-out forwards;
+}
+
+@keyframes swipeUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes swipeDown {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100%);
+    }
+} 
+
+/* Специальные стили для iOS */
+@supports (-webkit-touch-callout: none) {
+    .video-container {
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        -webkit-perspective: 1000px;
+    }
+
+    .video-container.swiping-up {
+        animation: iOSSwipeUpAnimation 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
+
+    .video-container.swiping-down {
+        animation: iOSSwipeDownAnimation 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
+
+    @keyframes iOSSwipeUpAnimation {
+        0% {
+            -webkit-transform: translateY(0) scale(1) rotateX(0);
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: translateY(-100vh) scale(0.8) rotateX(-10deg);
+            opacity: 0;
+        }
+    }
+
+    @keyframes iOSSwipeDownAnimation {
+        0% {
+            -webkit-transform: translateY(0) scale(1) rotateX(0);
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: translateY(100vh) scale(0.8) rotateX(10deg);
+            opacity: 0;
+        }
+    }
+
+    .video-container.next-video {
+        animation: iOSNextVideoAnimation 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
+
+    .video-container.prev-video {
+        animation: iOSPrevVideoAnimation 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
+
+    @keyframes iOSNextVideoAnimation {
+        0% {
+            -webkit-transform: translateY(100vh) scale(0.8) rotateX(-10deg);
+            opacity: 0;
+        }
+        100% {
+            -webkit-transform: translateY(0) scale(1) rotateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes iOSPrevVideoAnimation {
+        0% {
+            -webkit-transform: translateY(-100vh) scale(0.8) rotateX(10deg);
+            opacity: 0;
+        }
+        100% {
+            -webkit-transform: translateY(0) scale(1) rotateX(0);
+            opacity: 1;
+        }
+    }
+}
+
+/* Усиленные эффекты для всех устройств */
+.video-container {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.video-container.active {
+    z-index: 2;
+}
+
+.video-container.inactive {
+    z-index: 1;
+}
+
+.page-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform-style: preserve-3d;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.page-container.swiping-up {
+    animation: pageSwipeUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.page-container.swiping-down {
+    animation: pageSwipeDown 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes pageSwipeUp {
+    0% {
+        transform: translateY(0) scale(1) rotateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0.8) rotateX(-15deg);
+        opacity: 0;
+    }
+}
+
+@keyframes pageSwipeDown {
+    0% {
+        transform: translateY(0) scale(1) rotateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) scale(0.8) rotateX(15deg);
+        opacity: 0;
+    }
+}
+
+/* Специальные стили ля iOS */
+@supports (-webkit-touch-callout: none) {
+    .page-container {
+        -webkit-transform-style: preserve-3d;
+        -webkit-backface-visibility: hidden;
+    }
+
+    @keyframes pageSwipeUp {
+        0% {
+            -webkit-transform: translateY(0) scale(1) rotateX(0);
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: translateY(-100vh) scale(0.8) rotateX(-15deg);
+            opacity: 0;
+        }
+    }
+
+    @keyframes pageSwipeDown {
+        0% {
+            -webkit-transform: translateY(0) scale(1) rotateX(0);
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: translateY(100vh) scale(0.8) rotateX(15deg);
+            opacity: 0;
+        }
+    }
+}
+
+/* Обновленные стили для анимации в стиле TikTok */
+.page-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    perspective: 1500px;
+    transform-style: preserve-3d;
+}
+
+.video-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-origin: center center;
+    transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.video-container.swiping-up {
+    animation: tiktokSwipeUp 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+.video-container.swiping-down {
+    animation: tiktokSwipeDown 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+@keyframes tiktokSwipeUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-110%) scale(0.3);
+        opacity: 0;
+    }
+}
+
+@keyframes tiktokSwipeDown {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110%) scale(0.3);
+        opacity: 0;
+    }
+}
+
+.video-container.next-enter {
+    transform: translateY(110%) scale(0.3);
+    opacity: 0;
+    animation: tiktokEnterUp 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+.video-container.prev-enter {
+    transform: translateY(-110%) scale(0.3);
+    opacity: 0;
+    animation: tiktokEnterDown 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+@keyframes tiktokEnterUp {
+    0% {
+        transform: translateY(110%) scale(0.3);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes tiktokEnterDown {
+    0% {
+        transform: translateY(-110%) scale(0.3);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ��пециальные стили для iOS */
+@supports (-webkit-touch-callout: none) {
+    .video-container {
+        -webkit-transform-style: preserve-3d;
+        -webkit-perspective: 1500px;
+    }
+
+    .video-container.swiping-up {
+        -webkit-animation: tiktokSwipeUp 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    }
+
+    .video-container.swiping-down {
+        -webkit-animation: tiktokSwipeDown 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    }
+}
+
+/* Обновленные стили для смещения контента в стиле Safari */
+.page-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.video-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+}
+
+.video-container.sliding {
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    -webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.video-container.current {
+    z-index: 2;
+    opacity: 1;
+}
+
+.video-container.next {
+    transform: translateY(100%);
+    -webkit-transform: translateY(100%);
+    z-index: 1;
+}
+
+.video-container.prev {
+    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+    z-index: 1;
+}
+
+/* Добавляем затемнение при переходе */
+.video-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    z-index: 1;
+}
+
+.video-container.sliding::before {
+    opacity: 1;
+}
+
+/* Улучшаем видимость прогресса свайпа */
+.swipe-progress {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.swipe-progress-bar {
+    background: #fff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Safari-специфичные стили */
+@supports (-webkit-touch-callout: none) {
+    .page-container {
+        -webkit-transform: translateZ(0);
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .video-container {
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        -webkit-perspective: 1000px;
+        transition: -webkit-transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+
+    .video-container.sliding {
+        transition: -webkit-transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+}
+ 
